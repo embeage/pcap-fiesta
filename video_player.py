@@ -59,7 +59,7 @@ def svt_play_video(video_id, url, playback_time, save_requests=False, exit_flag=
     except TimeoutException:
         pass
     else:
-        driver.find_element_by_xpath(
+        driver.find_element(By.XPATH,
             "//button[@data-rt='video-player-parental-splash-play']").click()
 
     if exit_flag is not None:
