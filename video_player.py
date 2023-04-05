@@ -74,6 +74,8 @@ def svt_play_video(video_id, url, playback_time, save_requests=False, exit_flag=
         for request in driver.requests:
             if request.method == 'GET' and request.url.endswith('.mp4'):
                 response = request.response
+                if response is None:
+                    continue
                 get_request = {
                     'segment_url': request.url,
                     'content_length': response.headers.get('Content-Length'),
