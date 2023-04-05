@@ -62,6 +62,15 @@ def svt_play_video(video_id, url, playback_time, save_requests=False, exit_flag=
         driver.find_element(By.XPATH,
             "//button[@data-rt='video-player-parental-splash-play']").click()
 
+    # Will maybe get another play prompt, if so, click it.
+    try:
+        WebDriverWait(driver, 2).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//button[@data-rt='video-player-splash-play']"))
+        ).click()
+    except TimeoutException:
+        pass
+
     if exit_flag is not None:
         while not exit_flag.is_set():
             exit_flag.wait(playback_time)
